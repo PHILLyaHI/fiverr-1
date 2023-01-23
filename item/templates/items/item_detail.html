@@ -1,0 +1,35 @@
+{% extends "app/layout.html" %}
+
+{% block title %}{{ item.name }}{% endblock %}
+
+{% block content %}
+
+
+
+<div>
+    <br/>
+    <h3>{{ item.name }}</h3>
+    <h5>{{ item.description }}</h5>
+    <a href="{% url 'account' item.owner.id %}"><h5>{{ item.owner }}</h5></a>
+    <br/>
+
+    <h4>{{ item.price }}$</h4>
+    <hr>
+    {% if user.is_authenticated %}
+
+        {% if submitted %}
+            <h2>Your Order has Been Completed</h2>
+        {% else %}
+
+        <form action="" method=POST>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Buy" class="btn btn-success">
+        </form>
+
+        {% endif %}
+    {% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "app/layout.html" %}
+
+{% block title %}Create Invoice{% endblock %}
+
+{% block content %}
+
+<div>
+    {% if user.is_financeofficer %}
+
+    <h2>Create Invoice</h2>
+    <br/>
+
+    <form action="" method=POST>
+        {% csrf_token %}
+        {{ form.as_p }}
+    <input type="submit" value="Verify" class="btn btn-success">
+
+    {% else %}
+        <h2>You're not a Finance Officer!!!</h2>
+    {% endif %}
+
+</div>
+
+{% endblock %}

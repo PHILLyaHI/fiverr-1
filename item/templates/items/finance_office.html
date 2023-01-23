@@ -1,0 +1,50 @@
+{% extends "app/layout.html" %}
+
+{% block title %}Finance Office{% endblock %}
+
+{% block content %}
+
+<div>
+    {% if user.is_financeofficer %}
+
+    <br/><br/>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Buyer</th>
+                    <th scope="col">State</th>
+                    <th scope="col">Prices</th>
+                    <th scope="col">Make and Invoice</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+
+                {% if order.is_invoice == False %}
+
+                <tr>
+                    <td><a href="{% url 'item-detail' order.item.id %}">{{ order.item }}</a></td>
+                    <td><a href="{% url 'account' order.user.id %}"><h5>{{ order.user }}</h5></a></td>
+                    <td>{{ order.state }}</td>
+                    <td>{{ order.item.price }}$</td>
+                    <td><a href="{% url 'edit-invoice' order.id %}"><button class="btn btn-danger">create invoice</button></a></td>
+
+
+
+                </tr>
+                {% endif %}
+                {% empty %}
+                    <h2>There are no Items to Right now</h2>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+
+    <h2>You're not a Finance Officer!!!</h2>
+
+    {% endif %}
+</div>
+
+{% endblock %}

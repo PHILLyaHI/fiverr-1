@@ -1,0 +1,28 @@
+{% extends "app/layout.html" %}
+
+{% block title %}Invoice{% endblock %}
+
+{% block content %}
+
+
+
+<div>
+    <br/>
+    <h2>Invoice</h2><br/>
+    <h4>Billed To:</h4>
+    <h5>State: {{ invoice.state }}</h5>
+    <h5>City: {{ invoice.city }}</h5>
+    <h5>Street: {{ invoice.address }}</h5>
+    <h5>Home: {{ invoice.home }}</h5>
+    <br/>
+    <h4>Date Added: {{ invoice.date_added_order }}</h4>
+    <hr style="border-bottom: 2px solid;"/>
+
+    <h4>{{ invoice.invoice }}$ x {{ invoice.quantity }} <a href="{% url 'item-detail' invoice.item.id %}">{{ invoice.item }}</a></h4>
+    <h4>+ Service {{ invoice.service }}%</h4>
+    <h4>+ Tax {{ invoice.tax }}%</h4>
+    <h4>------------------------</h4>
+    <h4><b>Total: {{ invoice.invoice }}%</b></h4>
+</div>
+
+{% endblock %}
