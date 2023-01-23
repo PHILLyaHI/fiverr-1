@@ -1,0 +1,68 @@
+{% extends "app/layout.html" %}
+
+{% block title %}Approve Order{% endblock %}
+
+{% block content %}
+
+<div>
+    {% if user.is_manager %}
+
+    <br/><br/>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Buyer</th>
+                    <th scope="col">State</th>
+                    <th scope="col">View Invoice</th>
+                    <th scope="col">Verify</th>
+                    <th scope="col">Approve</th>
+                    <th scope="col">Cancel an Order</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+
+                {% if order.is_canceled == False and not order.is_approved == True or order.is_approved and order.is_verified == False and not order.is_canceled == True %}
+                    {% if order.is_invoice %}
+                <tr>
+                    <td><a href="{% url 'item-detail' order.item.id %}">{{ order.item }}</a></td>
+                    <td><a href="{% url 'account' order.user.id %}">{{ order.user }}</a></td>
+                    <td>{{ order.state }}</td>
+                    <td><a href="{% url 'invoice-detail' order.id %}">View Invoice</a></td>
+
+
+                        {% if order.is_verified %}
+                            <td><a href="{% url 'unverified' order.id %}"><button class="btn btn-success">unverify</button></a></td>
+                        {% else %}
+                            <td><a href="{% url 'verified' order.id %}"><button class="btn btn-danger">verify</button></a></td>
+                        {% endif %}
+
+                        {% if order.is_approved %}
+                            <td><a href="{% url 'disapproved' order.id %}"><button class="btn btn-success">disapprove</button></a></td>
+                        {% else %}
+                            <td><a href="{% url 'approved' order.id %}"><button class="btn btn-danger">approve</button></a></td>
+                        {% endif %}
+
+                        <td><a href="{% url 'cancel' order.id %}"><button class="btn btn-warning">cancel</button></a></td>
+                        </center>
+
+                </tr>
+                    {% endif %}
+                {% endif %}
+
+                {% empty %}
+                <h2>There are no Items to Approve Right now</h2>
+
+            {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+
+    <h2>You're not a Manager!!!</h2>
+
+    {% endif %}
+</div>
+
+{% endblock %}

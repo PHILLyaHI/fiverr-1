@@ -1,0 +1,31 @@
+{% extends "app/layout.html" %}
+
+{% block title %}Menu{% endblock %}
+
+{% block content %}
+
+<div>
+
+    <style>
+        a {
+            padding-right: 10px;
+        }
+    </style>
+
+    <br />
+         <h2>Menu</h2>
+
+    <br />
+
+    {% for item in items %}
+
+        <tr><td>
+        <a href="{% url 'item-detail' item.id %}"><button type="submit" class="btn btn-outline-info waves-effect">{{ item.name }}</button></a>
+        </td></tr>
+
+    {% empty %}
+        <h2>There are no Items Right now</h2>
+    {% endfor %}
+</div>
+
+{% endblock %}

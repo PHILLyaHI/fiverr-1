@@ -1,0 +1,28 @@
+{% if user.is_authenticated %}
+
+<style>
+    .myaccount:link { text-decoration: none; color: #999999}
+
+
+    .myaccount:visited { text-decoration: none; color: #999999}
+
+
+    .myaccount:hover { text-decoration: none; color: white}
+</style>
+
+<form id="logoutForm" action="/logout" method="post" class="navbar-right">
+    {% csrf_token %}
+    <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'myaccount' %}" class="navbar-brand">Hello {{ user.username }}!</a></li>
+        <li><a href="{% url 'logout' %}">Log out</a></li>
+    </ul>
+</form>
+
+{% else %}
+
+<ul class="nav navbar-nav navbar-right">
+    <li><a href="{% url 'sign-up' %}">Sign Up</a></li>
+    <li><a href="{% url 'login' %}">Log in</a></li>
+</ul>
+
+{% endif %}

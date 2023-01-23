@@ -1,0 +1,73 @@
+{% extends "app/layout.html" %}
+
+{% block title %}Your Profile{% endblock %}
+
+{% block content %}
+
+<style>
+    .item:link { text-decoration: none; color: black;}
+
+
+    .item:visited { text-decoration: none; color: black}
+
+
+    .item:hover { text-decoration: none; color: black}
+
+</style>
+
+<div>
+    <br/>
+    <h2>Hi, {{ user.username }}</h2>
+    <h4>{{ user.first_name }} {{ user.last_name }}</h4>
+    <h5>{{ user.email }}</h5>
+    <br/>
+    <h3>Your Orders</h3>
+    {% for order in orders %}
+    <tr><td>
+        {% if order.user == user %}
+            {% if order.is_invoice %}
+            <a class="item" href="{% url 'invoice-detail' order.id %}" style="padding-right: 10px;">
+            <button type="submit" class="btn btn-outline-info waves-effect">
+                <b>{{ order.item }}</b>
+                <br/>
+                    <b>{{ order.address }}</b>
+                <br/><br/>
+                {% if order.is_verified == False %}
+                    Not Verified
+                {% else %}
+                    Verified
+                {% endif %}
+                <br/>
+                {% if order.is_approved == False %}
+                    Not Approved
+                {% else %}
+                    Approved
+                {% endif %}
+                <br/>
+                {% if order.is_completed == False %}
+                    Not Delivered
+                {% else %}
+                    Delivered
+                {% endif %}
+            </button></a>
+            {% endif %}
+        {% endif %}
+    </td></tr>
+    {% endfor %}
+
+    <br/><br/>
+    <h3>You're Items</h3>
+    {% for item in items %}
+        {% if item.owner == user %}
+            <a class="item" href="{% url 'item-detail' item.id %}" style="padding-right: 10px;">
+            <button type="submit" class="btn btn-outline-info waves-effect">
+                {{ item.name }}
+            </button></a>
+        {% endif %}
+    {% empty %}
+        <h4>You Have no Items</h4>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

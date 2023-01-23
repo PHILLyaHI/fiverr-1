@@ -1,0 +1,47 @@
+{% extends "app/layout.html" %}
+
+{% block title %}Approve Order{% endblock %}
+
+{% block content %}
+
+<div>
+    {% if user.is_courier %}
+
+    <br/><br/>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Complete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+
+                {% if order.is_completed == False %}
+
+                <tr>
+                    <td>{{ order.item }}</td>
+                    <td>{{ order.user }}</td>
+                    <td>{{ order.state }} | {{ order.city }} | {{ order.address }} | {{ order.home }}</td>
+
+                    <td><a href="{% url 'completed' order.id %}"><button class="btn btn-danger">complete</button></a></td>
+
+                </tr>
+                {% endif %}
+            {% empty %}
+                <h2>There are no Items Deliver Right now</h2>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+
+    <h2>You're not a Courier!!!</h2>
+
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "app/layout.html" %}
+
+{% block title %}{{ user.username }} Profile{% endblock %}
+
+{% block content %}
+
+
+<div>
+    <br/>
+    <h2>{{ user2.username }}</h2>
+    <h4>{{ user2.first_name }} {{ user2.last_name }}</h4>
+    <h5>{{ user2.email }}</h5>
+
+    <br/>
+    <h3>Items</h3>
+    {% for item in items %}
+        {% if item.owner == user2 %}
+            <a class="item" href="{% url 'item-detail' item.id %}" style="padding-right: 10px;">
+            <button type="submit" class="btn btn-outline-info waves-effect">
+                {{ item.name }}
+            </button></a>
+        {% endif %}
+    {% endfor %}
+
+</div>
+
+{% endblock %}
