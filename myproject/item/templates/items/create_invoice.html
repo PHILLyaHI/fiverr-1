@@ -13,7 +13,7 @@
     <form action="" method=POST>
         {% csrf_token %}
         {{ form.as_p }}
-    <input type="submit" value="Verify" class="btn btn-success">
+        <input type="submit" value="Verify" class="btn btn-success">
 
     {% else %}
         <h2>You're not a Finance Officer!!!</h2>

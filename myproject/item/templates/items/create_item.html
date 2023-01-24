@@ -5,7 +5,7 @@
 {% block content %}
 
 <div>
-    {% if user.is_authenticated %}
+    {% if user.is_salesman %}
 
         {% if submitted %}
             <h2>Your Item has Been Successfully Created</h2>
@@ -22,7 +22,7 @@
         {% endif %}
 
     {% else %}
-        <h2>You're not Authenticated!!!</h2>
+        <h2>You're not a Salesman!!!</h2>
     {% endif %}
 
 </div>

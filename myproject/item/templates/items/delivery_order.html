@@ -20,6 +20,7 @@
             <tbody>
                 {% for order in orders %}
 
+                {% if order.is_approved and order.is_verified %}
                 {% if order.is_completed == False %}
 
                 <tr>
@@ -30,6 +31,7 @@
                     <td><a href="{% url 'completed' order.id %}"><button class="btn btn-danger">complete</button></a></td>
 
                 </tr>
+                {% endif %}
                 {% endif %}
             {% empty %}
                 <h2>There are no Items Deliver Right now</h2>
