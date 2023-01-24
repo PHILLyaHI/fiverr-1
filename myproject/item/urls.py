@@ -6,6 +6,7 @@ urlpatterns = [
     path("menu/", views.menu, name="menu"),
     path("item/<item_id>/", views.item_detail, name="item-detail"),
     path("create-item/", views.create_item, name="create-item"),
+    path("item/delete/<item_id>/", views.delete_item, name="delete-item"),
 
 
 

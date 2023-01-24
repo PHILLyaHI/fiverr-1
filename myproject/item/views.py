@@ -46,7 +46,10 @@ def create_item(request):
     return render(request, 'items/create_item.html', {"form": form, "submitted": submitted})
 
 
-
+def delete_item(request,item_id):
+    item = Item.objects.get(pk=item_id)
+    item.delete()
+    return redirect('item-list')
 
 
 

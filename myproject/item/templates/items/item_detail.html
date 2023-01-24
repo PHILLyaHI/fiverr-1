@@ -30,6 +30,12 @@
         {% endif %}
     {% endif %}
 
+    {% if item.owner == user %}
+        <br/>
+        <br/>
+        <a href="{% url 'delete-item' item.id %}"><button class="btn btn-danger">Delete Item</button></a>
+    {% endif %}
+
 </div>
 
 {% endblock %}
