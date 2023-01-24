@@ -15,7 +15,8 @@
                     <th scope="col">Buyer</th>
                     <th scope="col">State</th>
                     <th scope="col">Price</th>
-                    <th scope="col">Make an Invoice</th>
+                    <th scope="col">Invoice</th>
+                    <th scope="col">Verify Invoice</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,7 +29,12 @@
                     <td><a href="{% url 'account' order.user.id %}"><h5>{{ order.user }}</h5></a></td>
                     <td>{{ order.state }}</td>
                     <td>{{ order.item.price }}$</td>
-                    <td><a href="{% url 'edit-invoice' order.id %}"><button class="btn btn-danger">create invoice</button></a></td>
+                    {% if order.is_invoice_created %}
+                        <td><a href="{% url 'invoice-detail' order.id %}">view invoice</a></td>
+                        <td><a href="{% url 'verify-invoice' order.id %}"><button class="btn btn-danger">verify order</button></a></td>
+                    {% else %}
+                        <td><a href="{% url 'edit-invoice' order.id %}"><button class="btn btn-danger">create invoice</button></a></td>
+                    {% endif %}
 
 
 

@@ -35,6 +35,7 @@ class DeliveryOrder(models.Model):
     is_canceled = models.BooleanField(default=False)
 
     is_invoice = models.BooleanField(default=False)
+    is_invoice_created = models.BooleanField(default=False)
     service = models.IntegerField(default=10)
     tax = models.IntegerField(default=10)
     quantity = models.IntegerField(default=1)

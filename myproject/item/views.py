@@ -123,12 +123,18 @@ def edit_invoice(request, invoice_id):
     if form.is_valid():
         tax_service = order.item.price * order.quantity / 100 * (order.tax + order.service)
         order.invoice = order.item.price * order.quantity + tax_service
-        order.is_invoice = True
+        order.is_invoice_created = True
         form.save()
         return redirect('finance-office')
 
     return render(request, 'items/create_invoice.html', {"order": order, "form": form})
 
+
+def verify_invoice(request, invoice_id):
+    order = DeliveryOrder.objects.get(pk=invoice_id)
+    order.is_invoice = True
+    order.save()
+    return redirect('finance-office')
 
 def invoice_detail(request, invoice_id):
     invoice = DeliveryOrder.objects.get(pk=invoice_id)

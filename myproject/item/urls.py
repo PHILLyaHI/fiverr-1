@@ -28,5 +28,6 @@ urlpatterns = [
     #Finance officer system
     path("finance-office/", views.finance_office, name="finance-office"),
     path("edit-invoice/<invoice_id>/", views.edit_invoice, name="edit-invoice"),
+    path("verify-invoice/<invoice_id>/", views.verify_invoice, name="verify-invoice"),
     path("invoice/<invoice_id>/", views.invoice_detail, name="invoice-detail"),
 ]
