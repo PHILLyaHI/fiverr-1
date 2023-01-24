@@ -49,7 +49,7 @@ def create_item(request):
 def delete_item(request,item_id):
     item = Item.objects.get(pk=item_id)
     item.delete()
-    return redirect('item-list')
+    return redirect('menu')
 
 
 
